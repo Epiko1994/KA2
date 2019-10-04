@@ -18,6 +18,7 @@ public class Person implements Serializable {
     private String lastname;
     @ManyToOne
     private Address address;
+    
     @ManyToMany
     private List<Hobby> hobbies;
     @OneToMany
@@ -26,7 +27,17 @@ public class Person implements Serializable {
     public Person() {
 
     }
-        
+
+    public Person(String email, String firstname, String lastname, Address address, List<Hobby> hobbies, List<Phone> phone) {
+        this.email = email;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.address = address;
+        this.hobbies = hobbies;
+        this.phone = phone;
+    }
+    
+
     public Long getId() {
         return id;
     }
@@ -66,4 +77,21 @@ public class Person implements Serializable {
     public void setAddress(Address address) {
         this.address = address;
     }
+
+    public List<Hobby> getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(List<Hobby> hobbies) {
+        this.hobbies = hobbies;
+    }
+
+    public List<Phone> getPhone() {
+        return phone;
+    }
+
+    public void setPhone(List<Phone> phone) {
+        this.phone = phone;
+    }
+        
 }
