@@ -1,7 +1,10 @@
 package facades;
 
+import entities.Address;
+import entities.Hobby;
 import entities.Person;
 import entities.Phone;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -57,6 +60,14 @@ public class PersonFacade {
     }
 
     public Person deletePerson(long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Person addPerson(String email, String firstname, String lastname,Address address, List<Hobby> hobbies, List<Phone> phone) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Person editPerson(Person p) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
