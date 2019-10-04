@@ -7,16 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="daaffa03-ad95-4eba-8c1e-661120582d2c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Address.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Cityinfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Cityinfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Hobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Hobby.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Phone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Phone.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/facades/FacadeExampleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/facades/FacadeExampleTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/rest/PersonResourceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/rest/PersonResourceTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -234,7 +225,7 @@
       <updated>1570173551907</updated>
       <workItem from="1570173556356" duration="428000" />
       <workItem from="1570174016531" duration="3138000" />
-      <workItem from="1570178287932" duration="3385000" />
+      <workItem from="1570178287932" duration="3898000" />
     </task>
     <servers />
   </component>
