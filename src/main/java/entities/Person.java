@@ -21,7 +21,7 @@ public class Person implements Serializable {
     
     @ManyToMany
     private List<Hobby> hobbies;
-    @OneToMany
+    @OneToMany(mappedBy = "person")
     private List<Phone> phone;
 
     public Person() {

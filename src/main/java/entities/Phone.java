@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 
 @Entity
-@NamedQuery(name = "RenameMe.deleteAllRows", query = "DELETE from Person")
+@NamedQuery(name = "Phone.deleteAllRows", query = "DELETE from Phone")
 public class Phone implements Serializable {
 
     private static final long serialVersionUID = 1L;

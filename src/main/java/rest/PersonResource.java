@@ -31,7 +31,7 @@ public class PersonResource {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)   
-    public Person getPerson(@PathParam("id") int id) {
+    public Person getPerson(@PathParam("id") long id) {
         Person p = FACADE.getPersonById(id);
         return p;
     }

@@ -1,21 +1,20 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package facades;
 
-import entities.Person;
 import entities.Phone;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-/**
- *
- * Rename Class to a relevant name Add add relevant facade methods
- */
-public class PersonFacade {
-
-    private static PersonFacade instance;
+public class PhoneFacade {
+    private static PhoneFacade instance;
     private static EntityManagerFactory emf;
     
     //Private Constructor to ensure Singleton
-    private PersonFacade() {}
+    private PhoneFacade() {}
     
     
     /**
@@ -23,10 +22,10 @@ public class PersonFacade {
      * @param _emf
      * @return an instance of this facade class.
      */
-    public static PersonFacade getFacadeExample(EntityManagerFactory _emf) {
+    public static PhoneFacade getFacadeExample(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
-            instance = new PersonFacade();
+            instance = new PhoneFacade();
         }
         return instance;
     }
@@ -35,28 +34,28 @@ public class PersonFacade {
         return emf.createEntityManager();
     }
     
-    public long getPersonCount(){
+    public long getPhoneCount(){
         EntityManager em = emf.createEntityManager();
         try{
-            long personCount = (long)em.createQuery("SELECT COUNT(r) FROM Person r").getSingleResult();
-            return personCount;
+            long phoneCount = (long)em.createQuery("SELECT COUNT(p) FROM Phone p").getSingleResult();
+            return phoneCount;
         }finally{  
             em.close();
         }
         
     }
     
-    public Person getPersonById(long id){
+    public Phone getPhoneById(long id){
             EntityManager em = getEntityManager();
         try {
-            Person person = em.find(Person.class, id);
-            return person;
+            Phone phone = em.find(Phone.class, id);
+            return phone;
         } finally {
             em.close();
         }
-    }
+    }  
 
-    public Person deletePerson(long id) {
+    public Phone deletePhoneNumber(long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
