@@ -1,11 +1,8 @@
 package entities;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
+import java.util.List;
+import javax.persistence.*;
 
 
 @Entity
@@ -16,9 +13,10 @@ public class Hobby implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String email;
-    private String firstname;
-    private String lastname;
+
+    @ManyToMany(mappedBy = "hobbies")
+    private List<Person> persons;
+
 
     public Hobby() {
 

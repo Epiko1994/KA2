@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
 
 
@@ -17,13 +18,11 @@ public class Person implements Serializable {
     private String lastname;
     @ManyToOne
     private Address address;
+    @ManyToMany
+    private List<Hobby> hobbies;
     @OneToMany
-    private Hobby hobby;
-    
-    
-    
+    private List<Phone> phone;
 
-    
     public Person() {
 
     }
@@ -66,13 +65,5 @@ public class Person implements Serializable {
 
     public void setAddress(Address address) {
         this.address = address;
-    }
-
-    public Hobby getHobby() {
-        return hobby;
-    }
-
-    public void setHobby(Hobby hobby) {
-        this.hobby = hobby;
     }
 }
