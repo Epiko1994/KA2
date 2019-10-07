@@ -20,18 +20,18 @@ public class PersonDTO {
     private String lastname;
     private AddressDTO address;
     private List<HobbyDTO> hobbies;
-    private List<Phone> phone;
+    private List<PhoneDTO> phones;
 
     public PersonDTO() {
     }
 
-    public PersonDTO(String email, String firstname, String lastname, AddressDTO address, List<HobbyDTO> hobbies, List<Phone> phone) {
+    public PersonDTO(String email, String firstname, String lastname, AddressDTO address, List<HobbyDTO> hobbies, List<PhoneDTO> phone) {
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
         this.hobbies = hobbies;
-        this.phone = phone;
+        this.phones = phone;
     }
 
     public Long getId() {
@@ -82,12 +82,12 @@ public class PersonDTO {
         this.hobbies = hobbies;
     }
 
-    public List<Phone> getPhone() {
-        return phone;
+    public List<PhoneDTO> getPhone() {
+        return phones;
     }
 
-    public void setPhone(List<Phone> phone) {
-        this.phone = phone;
+    public void setPhone(List<PhoneDTO> phone) {
+        this.phones = phone;
     }
 
     @Override
@@ -99,7 +99,7 @@ public class PersonDTO {
         hash = 17 * hash + Objects.hashCode(this.lastname);
         hash = 17 * hash + Objects.hashCode(this.address);
         hash = 17 * hash + Objects.hashCode(this.hobbies);
-        hash = 17 * hash + Objects.hashCode(this.phone);
+        hash = 17 * hash + Objects.hashCode(this.phones);
         return hash;
     }
 
@@ -133,7 +133,7 @@ public class PersonDTO {
         if (!Objects.equals(this.hobbies, other.hobbies)) {
             return false;
         }
-        if (!Objects.equals(this.phone, other.phone)) {
+        if (!Objects.equals(this.phones, other.phones)) {
             return false;
         }
         return true;
