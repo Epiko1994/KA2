@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @NamedQuery(name = "RenameMe.deleteAllRows", query = "DELETE from Person")
-public class Cityinfo implements Serializable {
+public class CityInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -18,8 +18,12 @@ public class Cityinfo implements Serializable {
     @OneToMany(mappedBy = "cityinfo")
     private List<Address> addresses;
 
-    public Cityinfo() {
+    public CityInfo() {
+    }
 
+    public CityInfo(int zipcode, String city) {
+        this.zipcode = zipcode;
+        this.city = city;
     }
 
     public Long getId() {
@@ -29,5 +33,31 @@ public class Cityinfo implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public int getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(int zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
+    
+    
 
 }

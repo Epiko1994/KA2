@@ -1,6 +1,11 @@
 package facades;
 
+import dto.HobbyDTO;
+import dto.PersonDTO;
+import entities.CityInfo;
 import entities.Hobby;
+import entities.Person;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -45,10 +50,10 @@ public class HobbyFacade {
 
     }
 
-    public Hobby getHobbyById(long id){
+    public HobbyDTO getHobbyById(long id){
         EntityManager em = getEntityManager();
         try {
-            Hobby hobby = em.find(Hobby.class, id);
+            HobbyDTO hobby = em.find(HobbyDTO.class, id);
             return hobby;
         } finally {
             em.close();

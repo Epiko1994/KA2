@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Schema(name = "Person")
-public class Person {
+public class PersonDTO {
     private Long id;
     private String email;
     private String firstname;
@@ -22,10 +22,10 @@ public class Person {
     private List<Hobby> hobbies;
     private List<Phone> phone;
 
-    public Person() {
+    public PersonDTO() {
     }
 
-    public Person(String email, String firstname, String lastname, Address address, List<Hobby> hobbies, List<Phone> phone) {
+    public PersonDTO(String email, String firstname, String lastname, Address address, List<Hobby> hobbies, List<Phone> phone) {
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -114,7 +114,7 @@ public class Person {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Person other = (Person) obj;
+        final PersonDTO other = (PersonDTO) obj;
         if (!Objects.equals(this.email, other.email)) {
             return false;
         }

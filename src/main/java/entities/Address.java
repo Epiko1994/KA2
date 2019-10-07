@@ -18,13 +18,13 @@ public class Address implements Serializable {
     @OneToMany(mappedBy = "address")
     private List<Person> persons;
     @ManyToOne
-    private Cityinfo cityinfo;
+    private CityInfo cityinfo;
 
     public Address() {
 
     }
 
-    public Address(String street, String additionalInfo, List<Person> persons, Cityinfo cityinfo) {
+    public Address(String street, String additionalInfo, List<Person> persons, CityInfo cityinfo) {
         this.street = street;
         this.additionalInfo = additionalInfo;
         this.persons = persons;
@@ -65,11 +65,11 @@ public class Address implements Serializable {
         this.persons = persons;
     }
 
-    public Cityinfo getCityinfo() {
+    public CityInfo getCityinfo() {
         return cityinfo;
     }
 
-    public void setCityinfo(Cityinfo cityinfo) {
+    public void setCityinfo(CityInfo cityinfo) {
         this.cityinfo = cityinfo;
     }
     

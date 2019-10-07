@@ -11,19 +11,19 @@ import java.util.Objects;
  *
  * @author Ulrik
  */
-public class HobbyDTO {
+public class CityInfoDTO {
     
     private Long id;
-    private String name;
-    private String description;
+    private int zipcode;
+    private String city;
 
-    public HobbyDTO() {
+    public CityInfoDTO() {
     }
 
-    public HobbyDTO(Long id, String name, String description) {
+    public CityInfoDTO(Long id, int zipcode, String city) {
         this.id = id;
-        this.name = name;
-        this.description = description;
+        this.zipcode = zipcode;
+        this.city = city;
     }
 
     public Long getId() {
@@ -34,28 +34,28 @@ public class HobbyDTO {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public int getZipcode() {
+        return zipcode;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setZipcode(int zipcode) {
+        this.zipcode = zipcode;
     }
 
-    public String getDescription() {
-        return description;
+    public String getCity() {
+        return city;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + Objects.hashCode(this.id);
-        hash = 29 * hash + Objects.hashCode(this.name);
-        hash = 29 * hash + Objects.hashCode(this.description);
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.id);
+        hash = 67 * hash + this.zipcode;
+        hash = 67 * hash + Objects.hashCode(this.city);
         return hash;
     }
 
@@ -70,11 +70,11 @@ public class HobbyDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final HobbyDTO other = (HobbyDTO) obj;
-        if (!Objects.equals(this.name, other.name)) {
+        final CityInfoDTO other = (CityInfoDTO) obj;
+        if (this.zipcode != other.zipcode) {
             return false;
         }
-        if (!Objects.equals(this.description, other.description)) {
+        if (!Objects.equals(this.city, other.city)) {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {

@@ -1,20 +1,23 @@
 package facades;
 
-import entities.Hobby;
+import dto.CityInfoDTO;
+import entities.CityInfo;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
  * Rename Class to a relevant name Add add relevant facade methods
  */
-public class HobbyFacade {
+public class CityInfoFacade {
 
-    private static HobbyFacade instance;
+    private static CityInfoFacade instance;
     private static EntityManagerFactory emf;
 
     //Private Constructor to ensure Singleton
-    private HobbyFacade() {}
+    private CityInfoFacade() {}
 
 
     /**
@@ -22,10 +25,10 @@ public class HobbyFacade {
      * @param _emf
      * @return an instance of this facade class.
      */
-    public static HobbyFacade getHobbyFacade(EntityManagerFactory _emf) {
+    public static CityInfoFacade getCityInfoFacade(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
-            instance = new HobbyFacade();
+            instance = new CityInfoFacade();
         }
         return instance;
     }
@@ -34,25 +37,15 @@ public class HobbyFacade {
         return emf.createEntityManager();
     }
 
-    public long getHobbyCount(){
+    public List<CityInfoDTO> getAllZips() {
         EntityManager em = emf.createEntityManager();
         try{
-            long HobbyCount = (long)em.createQuery("SELECT COUNT(r) FROM Hobby r").getSingleResult();
-            return HobbyCount;
-        }finally{
-            em.close();
-        }
-
-    }
-
-    public Hobby getHobbyById(long id){
-        EntityManager em = getEntityManager();
-        try {
-            Hobby hobby = em.find(Hobby.class, id);
-            return hobby;
-        } finally {
+            TypedQuery<CityInfoDTO> query = 
+                em.createQuery("Select c from CityInfo c", CityInfoDTO.class);
+            return query.getResultList();
+        }finally {
             em.close();
         }
     }
-
+    
 }

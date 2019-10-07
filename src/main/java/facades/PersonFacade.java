@@ -1,5 +1,6 @@
 package facades;
 
+import dto.PersonDTO;
 import entities.Address;
 import entities.Hobby;
 import entities.Person;
@@ -68,6 +69,22 @@ public class PersonFacade {
     }
 
     public Person editPerson(Person p) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Person getPersonByPhone(long phone) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<Person> getPersonByZip(long zip) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<PersonDTO> getHobbyPersons(String hobby) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int getHobbyPersonsCount(String hobby) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
