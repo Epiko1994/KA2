@@ -1,12 +1,19 @@
 package rest;
 
+import dto.AddressDTO;
+import dto.CityInfoDTO;
+import entities.Address;
+import entities.CityInfo;
+import entities.Hobby;
 import entities.Person;
+import entities.Phone;
 import org.junit.jupiter.api.*;
 import utils.EMF_Creator;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
 import io.restassured.parsing.Parser;
 import java.net.URI;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.core.UriBuilder;
@@ -25,7 +32,14 @@ public class PersonResourceTest {
 
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
-    private static Person r1,r2;
+    private static Person p1;
+    private static Hobby h1;
+    private static Address a1;
+    private static CityInfo c1;
+    private static Phone ph1;
+    private static List<Person> persons;
+    private static List<Hobby> hobbies;
+    private static List<Phone> phones;
     
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
     private static HttpServer httpServer;
@@ -62,13 +76,19 @@ public class PersonResourceTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-        r1 = new Person();
-        r2 = new Person();
+        h1 = new Hobby("Løb", "Løber en tur");
+        hobbies.add(h1);
+        c1 = new CityInfo(3770, "Allinge");
+        a1 = new Address("Vejen 11", "Bor her", persons, c1);
+        ph1 = new Phone("123456", "Mobil", p1);
+        phones.add(ph1);
+        
+        p1 = new Person("hej@mail.dk", "Joe", "Hansen", a1, hobbies, phones);
+        persons.add(p1);
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("RenameMe.deleteAllRows").executeUpdate();
-            em.persist(r1);
-            em.persist(r2); 
+            em.createNamedQuery("Person.deleteAllRows").executeUpdate();
+            em.persist(p1); 
             em.getTransaction().commit();
         } finally { 
             em.close();

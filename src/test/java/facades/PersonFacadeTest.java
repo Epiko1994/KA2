@@ -13,19 +13,19 @@ import utils.EMF_Creator.Strategy;
 
 //Uncomment the line below, to temporarily disable this test
 @Disabled
-public class FacadeExampleTest {
+public class PersonFacadeTest {
 
     private static EntityManagerFactory emf;
     private static PersonFacade facade;
 
-    public FacadeExampleTest() {
+    public PersonFacadeTest() {
     }
 
     //@BeforeAll
     public static void setUpClass() {
         emf = EMF_Creator.createEntityManagerFactory(
                 "pu",
-                "jdbc:mysql://localhost:3307/startcode_test",
+                "jdbc:mysql://localhost:3307/ka2_test",
                 "dev",
                 "ax2",
                 EMF_Creator.Strategy.CREATE);
