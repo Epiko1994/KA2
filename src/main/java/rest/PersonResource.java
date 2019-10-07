@@ -119,8 +119,8 @@ public class PersonResource {
                         content = @Content(mediaType = "application/json")),
                 @ApiResponse(responseCode = "200", description = "The Requested person"),
                 @ApiResponse(responseCode = "400", description = "Person not found")})
-    public Person getPerson(@PathParam("id") long id) {
-        Person p = FACADE.getPersonById(id);
+    public PersonDTO getPerson(@PathParam("id") long id) {
+        PersonDTO p = FACADE.getPersonById(id);
         return p;
     }
     
@@ -147,7 +147,7 @@ public class PersonResource {
             })
     public String addPerson(String person){
         dto.PersonDTO p = GSON.fromJson(person, dto.PersonDTO.class);
-        Person pNew = FACADE.addPerson(p.getEmail(), p.getFirstname(), p.getLastname(), p.getAddress(), p.getHobbies(), p.getPhone());
+        PersonDTO pNew = FACADE.addPerson(p.getEmail(), p.getFirstname(), p.getLastname(), p.getAddress(), p.getHobbies(), p.getPhone());
         return GSON.toJson(pNew); //return GSON.toJson(new dto.Person(pNew));
     }
     
@@ -162,9 +162,9 @@ public class PersonResource {
             })
     public String updatePerson(@PathParam("id") long id, String person){
         dto.PersonDTO pDTO = GSON.fromJson(person, dto.PersonDTO.class);
-        Person p = new Person(pDTO.getEmail(), pDTO.getFirstname(), pDTO.getLastname(), pDTO.getAddress(), pDTO.getHobbies(), pDTO.getPhone());
+        PersonDTO p = new PersonDTO(pDTO.getEmail(), pDTO.getFirstname(), pDTO.getLastname(), pDTO.getAddress(), pDTO.getHobbies(), pDTO.getPhone());
         p.setId(id);
-        Person pNew = FACADE.editPerson(p);
+        PersonDTO pNew = FACADE.editPerson(p);
         return GSON.toJson(pNew);
     }
 

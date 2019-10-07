@@ -18,14 +18,14 @@ public class PersonDTO {
     private String email;
     private String firstname;
     private String lastname;
-    private Address address;
-    private List<Hobby> hobbies;
+    private AddressDTO address;
+    private List<HobbyDTO> hobbies;
     private List<Phone> phone;
 
     public PersonDTO() {
     }
 
-    public PersonDTO(String email, String firstname, String lastname, Address address, List<Hobby> hobbies, List<Phone> phone) {
+    public PersonDTO(String email, String firstname, String lastname, AddressDTO address, List<HobbyDTO> hobbies, List<Phone> phone) {
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -66,19 +66,19 @@ public class PersonDTO {
         this.lastname = lastname;
     }
 
-    public Address getAddress() {
+    public AddressDTO getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(AddressDTO address) {
         this.address = address;
     }
 
-    public List<Hobby> getHobbies() {
+    public List<HobbyDTO> getHobbies() {
         return hobbies;
     }
 
-    public void setHobbies(List<Hobby> hobbies) {
+    public void setHobbies(List<HobbyDTO> hobbies) {
         this.hobbies = hobbies;
     }
 

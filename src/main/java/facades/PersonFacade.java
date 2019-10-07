@@ -1,5 +1,7 @@
 package facades;
 
+import dto.AddressDTO;
+import dto.HobbyDTO;
 import dto.PersonDTO;
 import entities.Address;
 import entities.Hobby;
@@ -50,10 +52,10 @@ public class PersonFacade {
         
     }
     
-    public Person getPersonById(long id){
+    public PersonDTO getPersonById(long id){
             EntityManager em = getEntityManager();
         try {
-            Person person = em.find(Person.class, id);
+            PersonDTO person = em.find(PersonDTO.class, id);
             return person;
         } finally {
             em.close();
@@ -64,11 +66,11 @@ public class PersonFacade {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Person addPerson(String email, String firstname, String lastname,Address address, List<Hobby> hobbies, List<Phone> phone) {
+    public PersonDTO addPerson(String email, String firstname, String lastname,Address address, List<HobbyDTO> hobbies, List<Phone> phone) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Person editPerson(Person p) {
+    public PersonDTO editPerson(PersonDTO p) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
