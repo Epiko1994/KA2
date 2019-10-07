@@ -42,7 +42,7 @@ public class HobbyResource {
             tags = {"hobby"},
             responses = {
                 @ApiResponse(
-                        content = @Content(mediaType = "application/json", schema = @Schema(implementation = Hobby.class))),
+                        content = @Content(mediaType = "application/json")),
                 @ApiResponse(responseCode = "200", description = "The Requested hobby"),
                 @ApiResponse(responseCode = "400", description = "Hobby not found")})
     public HobbyDTO getHobby(@PathParam("id") int id) {

@@ -56,7 +56,7 @@ public class PersonResource {
             tags = {"person"},
             responses = {
                 @ApiResponse(
-                        content = @Content(mediaType = "application/json", schema = @Schema(implementation = Hobby.class))),
+                        content = @Content(mediaType = "application/json")),
                 @ApiResponse(responseCode = "200", description = "The Requested hobby"),
                 @ApiResponse(responseCode = "400", description = "Hobby not found")})
     public int getHobbyPersonsCount(@PathParam("hobby") String hobby) {
@@ -71,7 +71,7 @@ public class PersonResource {
             tags = {"person"},
             responses = {
                 @ApiResponse(
-                        content = @Content(mediaType = "application/json", schema = @Schema(implementation = Person.class))),
+                        content = @Content(mediaType = "application/json")),
                 @ApiResponse(responseCode = "200", description = "The Requested persons"),
                 @ApiResponse(responseCode = "400", description = "Hobby not found")})
     public List<PersonDTO> getHobbyPersons(@PathParam("hobby") String hobby) {
@@ -86,7 +86,7 @@ public class PersonResource {
             tags = {"person"},
             responses = {
                 @ApiResponse(
-                        content = @Content(mediaType = "application/json", schema = @Schema(implementation = Person.class))),
+                        content = @Content(mediaType = "application/json")),
                 @ApiResponse(responseCode = "200", description = "The Requested persons"),
                 @ApiResponse(responseCode = "400", description = "Zip not found")})
     public List<Person> getPersonByZip(@PathParam("zip") long zip) {
@@ -101,7 +101,7 @@ public class PersonResource {
             tags = {"person"},
             responses = {
                 @ApiResponse(
-                        content = @Content(mediaType = "application/json", schema = @Schema(implementation = Person.class))),
+                        content = @Content(mediaType = "application/json")),
                 @ApiResponse(responseCode = "200", description = "The Requested person"),
                 @ApiResponse(responseCode = "400", description = "Person not found")})
     public Person getPersonByPhone(@PathParam("phone") long phone) {
@@ -116,7 +116,7 @@ public class PersonResource {
             tags = {"person"},
             responses = {
                 @ApiResponse(
-                        content = @Content(mediaType = "application/json", schema = @Schema(implementation = Person.class))),
+                        content = @Content(mediaType = "application/json")),
                 @ApiResponse(responseCode = "200", description = "The Requested person"),
                 @ApiResponse(responseCode = "400", description = "Person not found")})
     public Person getPerson(@PathParam("id") long id) {

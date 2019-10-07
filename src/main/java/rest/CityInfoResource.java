@@ -47,7 +47,7 @@ public class CityInfoResource {
             tags = {"cityInfo"},
             responses = {
                 @ApiResponse(
-                        content = @Content(mediaType = "application/json", schema = @Schema(implementation = Hobby.class))),
+                        content = @Content(mediaType = "application/json")),
                 @ApiResponse(responseCode = "200", description = "List of all zipcodes"),
                 @ApiResponse(responseCode = "400", description = "Zipcode not found")})
     public List<CityInfoDTO> getAllZips() {
