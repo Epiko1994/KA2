@@ -66,7 +66,7 @@ public class PersonFacade {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public PersonDTO addPerson(String email, String firstname, String lastname,Address address, List<HobbyDTO> hobbies, List<Phone> phone) {
+    public PersonDTO addPerson(String email, String firstname, String lastname,AddressDTO address, List<HobbyDTO> hobbies, List<Phone> phone) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
