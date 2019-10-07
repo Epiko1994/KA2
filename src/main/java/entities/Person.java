@@ -16,9 +16,9 @@ public class Person implements Serializable {
     private String email;
     private String firstname;
     private String lastname;
+
     @ManyToOne
     private Address address;
-    
     @ManyToMany
     private List<Hobby> hobbies;
     @OneToMany(mappedBy = "person")

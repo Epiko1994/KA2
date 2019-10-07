@@ -8,6 +8,7 @@ import entities.Person;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 
 /**
  *
@@ -54,6 +55,17 @@ public class HobbyFacade {
         EntityManager em = getEntityManager();
         try {
             HobbyDTO hobby = em.find(HobbyDTO.class, id);
+            return hobby;
+        } finally {
+            em.close();
+        }
+    }
+
+    public HobbyDTO editHobby(HobbyDTO h) {
+        EntityManager em = getEntityManager();
+        try {
+            HobbyDTO hobby = em.find(HobbyDTO.class, h.getId());
+            hobby.setDescription(h.getDescription());
             return hobby;
         } finally {
             em.close();

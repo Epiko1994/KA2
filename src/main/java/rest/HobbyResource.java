@@ -16,11 +16,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 //Todo Remove or change relevant parts before ACTUAL use
@@ -33,7 +29,8 @@ public class HobbyResource {
             "dev",
             "ax2",
             EMF_Creator.Strategy.CREATE);
-    private static final HobbyFacade FACADE =  HobbyFacade.getHobbyFacade(EMF);   
+    private static final HobbyFacade FACADE =  HobbyFacade.getHobbyFacade(EMF);
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     
     @GET
     @Path("{id}")
@@ -48,6 +45,23 @@ public class HobbyResource {
     public HobbyDTO getHobby(@PathParam("id") int id) {
         HobbyDTO h = FACADE.getHobbyById(id);
         return h;
+    }
+
+    @PUT
+    @Path("{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Operation(summary = "Edit a hobby", tags = {"hobby"},
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Hobby edited"),
+                    @ApiResponse(responseCode = "400", description = "Arguments missing with the body to edit")
+            })
+    public String updateHobby(@PathParam("id") long id, String hobby){
+        dto.HobbyDTO hDTO = GSON.fromJson(hobby, dto.HobbyDTO.class);
+        HobbyDTO h = new HobbyDTO(hDTO.getName(), hDTO.getDescription());
+        h.setId(id);
+        HobbyDTO hNew = FACADE.editHobby(h);
+        return GSON.toJson(hNew);
     }
 
 }

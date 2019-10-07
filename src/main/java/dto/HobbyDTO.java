@@ -5,6 +5,8 @@
  */
 package dto;
 
+import entities.Hobby;
+
 import java.util.Objects;
 
 /**
@@ -18,6 +20,17 @@ public class HobbyDTO {
     private String description;
 
     public HobbyDTO() {
+    }
+
+    public HobbyDTO(Hobby h) {
+        this.id = h.getId();
+        this.name = h.getName();
+        this.description = h.getDescription();
+    }
+
+    public HobbyDTO(String name, String description) {
+        this.name = name;
+        this.description = description;
     }
 
     public HobbyDTO(Long id, String name, String description) {
