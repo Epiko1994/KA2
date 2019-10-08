@@ -147,7 +147,7 @@ public class PersonResource {
             })
     public String addPerson(String person){
         dto.PersonDTO p = GSON.fromJson(person, dto.PersonDTO.class);
-        PersonDTO pNew = FACADE.addPerson(p.getEmail(), p.getFirstname(), p.getLastname(), p.getAddress(), p.getHobbies(), p.getPhone());
+        Person pNew = FACADE.addPerson(p.getEmail(), p.getFirstname(), p.getLastname(), p.getAddress(), p.getHobbies(), p.getPhone());
         return GSON.toJson(pNew); //return GSON.toJson(new dto.Person(pNew));
     }
     

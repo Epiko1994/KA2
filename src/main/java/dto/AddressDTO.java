@@ -5,6 +5,8 @@
  */
 package dto;
 
+import entities.Address;
+
 import java.util.Objects;
 
 /**
@@ -16,15 +18,21 @@ public class AddressDTO {
     private Long id;
     private String street;
     private String additionalInfo;
-    private CityInfoDTO cityinfo;
+    private String cityinfo;
 
     public AddressDTO() {
     }
 
-    public AddressDTO(String street, String additionalInfo, CityInfoDTO cityinfo) {
+    public AddressDTO(String street, String additionalInfo, String cityinfo) {
         this.street = street;
         this.additionalInfo = additionalInfo;
         this.cityinfo = cityinfo;
+    }
+
+    public AddressDTO(Address a) {
+        this.street = a.getStreet();
+        this.additionalInfo = a.getAdditionalInfo();
+        this.cityinfo = a.getCityinfo().getZipcode() + " " + a.getCityinfo().getCity();
     }
 
     public Long getId() {
@@ -51,11 +59,11 @@ public class AddressDTO {
         this.additionalInfo = additionalInfo;
     }
 
-    public CityInfoDTO getCityinfo() {
+    public String getCityinfo() {
         return cityinfo;
     }
 
-    public void setCityinfo(CityInfoDTO cityinfo) {
+    public void setCityinfo(String cityinfo) {
         this.cityinfo = cityinfo;
     }
 

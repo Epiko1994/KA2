@@ -20,6 +20,11 @@ public class CityInfoDTO {
     public CityInfoDTO() {
     }
 
+    public CityInfoDTO(int zipcode, String city) {
+        this.zipcode = zipcode;
+        this.city = city;
+    }
+
     public CityInfoDTO(Long id, int zipcode, String city) {
         this.id = id;
         this.zipcode = zipcode;
