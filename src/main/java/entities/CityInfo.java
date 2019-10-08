@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 
 @Entity
-@NamedQuery(name = "RenameMe.deleteAllRows", query = "DELETE from Person")
+@NamedQuery(name = "CityInfo.deleteAllRows", query = "DELETE from Person")
 public class CityInfo implements Serializable {
 
     @Id
@@ -46,7 +46,5 @@ public class CityInfo implements Serializable {
     public void setAddresses(List<Address> addresses) {
         this.addresses = addresses;
     }
-    
-    
 
 }
