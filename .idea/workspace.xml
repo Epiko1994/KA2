@@ -8,10 +8,12 @@
   <component name="ChangeListManager">
     <list default="true" id="daaffa03-ad95-4eba-8c1e-661120582d2c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dto/AddressDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/AddressDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dto/PersonDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/PersonDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/entities/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Address.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/CityInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/CityInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Hobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Hobby.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/facades/CityInfoFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facades/CityInfoFacade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/facades/PersonFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/facades/PersonFacade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rest/PersonResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rest/PersonResource.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -244,7 +246,7 @@
       <workItem from="1570190859671" duration="233000" />
       <workItem from="1570191129829" duration="411000" />
       <workItem from="1570191612633" duration="279000" />
-      <workItem from="1570440032963" duration="14140000" />
+      <workItem from="1570440032963" duration="18670000" />
     </task>
     <servers />
   </component>

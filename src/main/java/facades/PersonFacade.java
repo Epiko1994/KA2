@@ -4,10 +4,7 @@ import dto.AddressDTO;
 import dto.HobbyDTO;
 import dto.PersonDTO;
 import dto.PhoneDTO;
-import entities.Address;
-import entities.Hobby;
-import entities.Person;
-import entities.Phone;
+import entities.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +62,7 @@ public class PersonFacade {
         }
     }
 
-    public PersonDTO addPerson(String email, String firstname, String lastname,String address, List<HobbyDTO> hobbies, List<PhoneDTO> phones) {
+    public Person addPerson(String email, String firstname, String lastname,String address,int zip, List<HobbyDTO> hobbies, List<PhoneDTO> phones) {
         EntityManager em = getEntityManager();
         List<Hobby> hobbyList = new ArrayList<>();
         for (int i = 0; i < hobbies.size(); i++) {
@@ -73,11 +70,13 @@ public class PersonFacade {
             hobbyList.add(tempHobby);
         }
         List<Phone> phoneList = new ArrayList<>();
-        for (int i = 0; i < phones.size(); i++) {
-            Phone tempPhone = new Phone(phones.get(i).getNumber(), phones.get(i).getDescritpion());
+        for (int i = 0; i < 1; i++) {
+            Phone tempPhone = new Phone("phones.get(i).getNumber()", "phones.get(i).getDescritpion()");
             phoneList.add(tempPhone);
         }
-        Person person = new Person(email,firstname,lastname,address,hobbyList,phoneList);
+        CityInfo cI = new CityInfo(zip, "Bynavn");
+        Address a = new Address(address, cI);
+        Person person = new Person(email, firstname, lastname, a, hobbyList, phoneList);
         try {
             em.getTransaction().begin();
             em.persist(person);

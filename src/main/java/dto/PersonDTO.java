@@ -19,17 +19,19 @@ public class PersonDTO {
     private String firstname;
     private String lastname;
     private String address;
+    private int zip;
     private List<HobbyDTO> hobbies;
     private List<PhoneDTO> phones;
 
     public PersonDTO() {
     }
 
-    public PersonDTO(String email, String firstname, String lastname, String address, List<HobbyDTO> hobbies, List<PhoneDTO> phone) {
+    public PersonDTO(String email, String firstname, String lastname, String address, int zip,  List<HobbyDTO> hobbies, List<PhoneDTO> phone) {
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
+        this.zip = zip;
         this.hobbies = hobbies;
         this.phones = phone;
     }
@@ -68,6 +70,14 @@ public class PersonDTO {
 
     public String getAddress() {
         return address;
+    }
+
+    public int getZip() {
+        return zip;
+    }
+
+    public void setZip(int zip) {
+        this.zip = zip;
     }
 
     public void setAddress(String address) {

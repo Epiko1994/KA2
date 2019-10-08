@@ -18,21 +18,26 @@ public class AddressDTO {
     private Long id;
     private String street;
     private String additionalInfo;
-    private String cityinfo;
+    private int cityinfo;
 
     public AddressDTO() {
     }
 
-    public AddressDTO(String street, String additionalInfo, String cityinfo) {
+    public AddressDTO(String street, int cityinfo) {
         this.street = street;
-        this.additionalInfo = additionalInfo;
         this.cityinfo = cityinfo;
     }
-
+    /*
     public AddressDTO(Address a) {
         this.street = a.getStreet();
         this.additionalInfo = a.getAdditionalInfo();
         this.cityinfo = a.getCityinfo().getZipcode() + " " + a.getCityinfo().getCity();
+    }
+    */
+    public AddressDTO(Address a) {
+        this.street = a.getStreet();
+        this.additionalInfo = a.getAdditionalInfo();
+        this.cityinfo = a.getCityinfo().getZipcode();
     }
 
     public Long getId() {
@@ -59,11 +64,11 @@ public class AddressDTO {
         this.additionalInfo = additionalInfo;
     }
 
-    public String getCityinfo() {
+    public int getCityinfo() {
         return cityinfo;
     }
 
-    public void setCityinfo(String cityinfo) {
+    public void setCityinfo(int cityinfo) {
         this.cityinfo = cityinfo;
     }
 

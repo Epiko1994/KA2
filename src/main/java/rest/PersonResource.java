@@ -136,7 +136,7 @@ public class PersonResource {
         Person pDeleted = FACADE.deletePerson(id);
         return "Personen er slettet!";
     }
-    /*
+
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
@@ -147,10 +147,10 @@ public class PersonResource {
             })
    public String addPerson(String person){
         dto.PersonDTO p = GSON.fromJson(person, dto.PersonDTO.class);
-        Person pNew = FACADE.addPerson(p.getEmail(), p.getFirstname(), p.getLastname(), p.getAddress(), p.getHobbies(), p.getPhone());
+        Person pNew = FACADE.addPerson(p.getEmail(), p.getFirstname(), p.getLastname(), p.getAddress(), p.getZip(), p.getHobbies(), p.getPhone());
         return GSON.toJson(pNew); //return GSON.toJson(new dto.Person(pNew));
     }
-    */
+
     @PUT
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
@@ -162,7 +162,7 @@ public class PersonResource {
             })
     public String updatePerson(@PathParam("id") long id, String person){
         dto.PersonDTO pDTO = GSON.fromJson(person, dto.PersonDTO.class);
-        PersonDTO p = new PersonDTO(pDTO.getEmail(), pDTO.getFirstname(), pDTO.getLastname(), pDTO.getAddress(), pDTO.getHobbies(), pDTO.getPhone());
+        PersonDTO p = new PersonDTO(pDTO.getEmail(), pDTO.getFirstname(), pDTO.getLastname(), pDTO.getAddress(), pDTO.getZip(), pDTO.getHobbies(), pDTO.getPhone());
         p.setId(id);
         PersonDTO pNew = FACADE.editPerson(p);
         return GSON.toJson(pNew);

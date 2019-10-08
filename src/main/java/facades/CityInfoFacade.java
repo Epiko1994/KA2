@@ -48,6 +48,16 @@ public class CityInfoFacade {
         }
     }
 
-    
+    public CityInfo getCityNameByZip(int zip){
+        EntityManager em = getEntityManager();
+        try {
+            CityInfo cityInfo = em.find(CityInfo.class, zip);
+            return cityInfo;
+        } finally {
+            em.close();
+        }
+    }
+
+
     
 }
