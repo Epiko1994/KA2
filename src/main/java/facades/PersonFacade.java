@@ -8,6 +8,8 @@ import entities.Address;
 import entities.Hobby;
 import entities.Person;
 import entities.Phone;
+
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -63,9 +65,19 @@ public class PersonFacade {
         }
     }
 
-    public PersonDTO addPerson(String email, String firstname, String lastname,AddressDTO address, List<HobbyDTO> hobbies, List<PhoneDTO> phones) {
+    public PersonDTO addPerson(String email, String firstname, String lastname,String address, List<HobbyDTO> hobbies, List<PhoneDTO> phones) {
         EntityManager em = getEntityManager();
-        PersonDTO person = new PersonDTO(email,firstname,lastname,address,hobbies,phones);
+        List<Hobby> hobbyList = new ArrayList<>();
+        for (int i = 0; i < hobbies.size(); i++) {
+            Hobby tempHobby = new Hobby(hobbies.get(i).getName(), hobbies.get(i).getDescription());
+            hobbyList.add(tempHobby);
+        }
+        List<Phone> phoneList = new ArrayList<>();
+        for (int i = 0; i < phones.size(); i++) {
+            Phone tempPhone = new Phone(phones.get(i).getNumber(), phones.get(i).getDescritpion());
+            phoneList.add(tempPhone);
+        }
+        Person person = new Person(email,firstname,lastname,address,hobbyList,phoneList);
         try {
             em.getTransaction().begin();
             em.persist(person);

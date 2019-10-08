@@ -136,7 +136,7 @@ public class PersonResource {
         Person pDeleted = FACADE.deletePerson(id);
         return "Personen er slettet!";
     }
-     
+    /*
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
@@ -145,12 +145,12 @@ public class PersonResource {
                 @ApiResponse(responseCode = "200", description = "Person added"),
                 @ApiResponse(responseCode = "400", description = "Not all arguments provided with the body")
             })
-    public String addPerson(String person){
+   public String addPerson(String person){
         dto.PersonDTO p = GSON.fromJson(person, dto.PersonDTO.class);
         Person pNew = FACADE.addPerson(p.getEmail(), p.getFirstname(), p.getLastname(), p.getAddress(), p.getHobbies(), p.getPhone());
         return GSON.toJson(pNew); //return GSON.toJson(new dto.Person(pNew));
     }
-    
+    */
     @PUT
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
