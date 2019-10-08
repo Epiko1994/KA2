@@ -9,10 +9,7 @@ import javax.persistence.*;
 @NamedQuery(name = "RenameMe.deleteAllRows", query = "DELETE from Person")
 public class CityInfo implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private int zipcode;
     private String city;
     @OneToMany(mappedBy = "cityinfo")
@@ -24,14 +21,6 @@ public class CityInfo implements Serializable {
     public CityInfo(int zipcode, String city) {
         this.zipcode = zipcode;
         this.city = city;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public int getZipcode() {
