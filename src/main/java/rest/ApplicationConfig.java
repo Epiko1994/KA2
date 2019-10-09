@@ -34,6 +34,7 @@ public class ApplicationConfig extends Application {
         resources.add(io.swagger.v3.jaxrs2.integration.resources.OpenApiResource.class);
         resources.add(org.glassfish.jersey.jsonb.internal.JsonBindingProvider.class);
         resources.add(org.glassfish.jersey.server.wadl.internal.WadlResource.class);
+        resources.add(rest.PersonResource.class);
     }
 
 }
