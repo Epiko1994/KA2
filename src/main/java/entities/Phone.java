@@ -1,32 +1,37 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
-
+/**
+ *
+ * @author Ulrik
+ */
 @Entity
-@NamedQuery(name = "Phone.deleteAllRows", query = "DELETE from Phone")
 public class Phone implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
     private String number;
-    private String descritpion;
+    private String description;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Person person;
 
     public Phone() {
-
     }
 
-    public Phone(String number, String descritpion) {
-        this.number = number;
-        this.descritpion = descritpion;
-    }
-
-    public Phone(String number, String descritpion, Person person) {
-        this.number = number;
-        this.descritpion = descritpion;
+    public Phone(String description, Person person) {
+        this.description = description;
         this.person = person;
     }
 
@@ -36,14 +41,6 @@ public class Phone implements Serializable {
 
     public void setNumber(String number) {
         this.number = number;
-    }
-
-    public String getDescritpion() {
-        return descritpion;
-    }
-
-    public void setDescritpion(String descritpion) {
-        this.descritpion = descritpion;
     }
 
     public Person getPerson() {
@@ -56,4 +53,14 @@ public class Phone implements Serializable {
     
     
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    
+    
 }

@@ -1,31 +1,35 @@
 package facades;
 
-import org.junit.jupiter.api.*;
 import utils.EMF_Creator;
 import entities.Person;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import utils.Settings;
 import utils.EMF_Creator.DbSelector;
 import utils.EMF_Creator.Strategy;
 
 //Uncomment the line below, to temporarily disable this test
 @Disabled
-public class PersonFacadeTest {
+public class FacadeExampleTest {
 
     private static EntityManagerFactory emf;
     private static PersonFacade facade;
 
-    public PersonFacadeTest() {
+    public FacadeExampleTest() {
     }
 
     //@BeforeAll
     public static void setUpClass() {
         emf = EMF_Creator.createEntityManagerFactory(
                 "pu",
-                "jdbc:mysql://localhost:3307/ka2_test",
+                "jdbc:mysql://localhost:3307/KA2o_test",
                 "dev",
                 "ax2",
                 EMF_Creator.Strategy.CREATE);
@@ -56,10 +60,9 @@ public class PersonFacadeTest {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("RenameMe.deleteAllRows").executeUpdate();
-            em.persist(new Person());
-            em.persist(new Person());
-
+            //em.createNamedQuery("RenameMe.deleteAllRows").executeUpdate();
+//            em.persist(new Person("hej@hej.dk", "Jor", "Hansen"));
+//            em.persist(new Person("hej@mail.dk", "Per", "Jensen"));
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -72,9 +75,9 @@ public class PersonFacadeTest {
     }
 
     // TODO: Delete or change this method 
-    @Test
-    public void testAFacadeMethod() {
-        assertEquals(2, facade.getPersonCount(), "Expects two rows in the database");
-    }
+//    @Test
+//    public void testAFacadeMethod() {
+//        assertEquals(2, facade.getPersonCount(), "Expects two rows in the database");
+//    }
 
 }

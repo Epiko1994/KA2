@@ -1,51 +1,58 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
-
+/**
+ *
+ * @author Ulrik
+ */
 @Entity
-@NamedQuery(name = "Address.deleteAllRows", query = "DELETE from Person")
 public class Address implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String street;
     private String additionalInfo;
+    @ManyToOne(fetch=FetchType.LAZY)
+    private CityInfo cityInfo;
     @OneToMany(mappedBy = "address",fetch=FetchType.LAZY,
         cascade = CascadeType.ALL,
         orphanRemoval = true
     )
-    private List<Person> persons;
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "ZIPCODE")
-    private CityInfo cityinfo;
+    private List<Person> persons = new ArrayList();;
 
     public Address() {
     }
 
-    public Address(String street) {
-        this.street = street;
-    }
-
-    public Address(String street, String additionalInfo, List<Person> persons, CityInfo cityinfo) {
+    public Address(String street, String additionalInfo, CityInfo cityInfo, List<Person> persons) {
         this.street = street;
         this.additionalInfo = additionalInfo;
+        this.cityInfo = cityInfo;
         this.persons = persons;
-        this.cityinfo = cityinfo;
     }
 
-    public Long getId() {
-        return id;
+    public Address(String street, String additionalInfo) {
+        this.street = street;
+        this.additionalInfo = additionalInfo;
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    
     public String getStreet() {
         return street;
     }
@@ -62,22 +69,20 @@ public class Address implements Serializable {
         this.additionalInfo = additionalInfo;
     }
 
-    public List<Person> getPersons() {
-        return persons;
+    public CityInfo getCityInfo() {
+        return cityInfo;
     }
 
-    public void setPersons(List<Person> persons) {
-        this.persons = persons;
-    }
-
-    public CityInfo getCityinfo() {
-        return cityinfo;
-    }
-
-    public void setCityinfo(CityInfo cityinfo) {
-        this.cityinfo = cityinfo;
+    public void setCityInfo(CityInfo cityInfo) {
+        this.cityInfo = cityInfo;
     }
     
-    
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
 }

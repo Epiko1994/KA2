@@ -1,58 +1,65 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
-
+/**
+ *
+ * @author Ulrik
+ */
 @Entity
-@NamedQuery(name = "CityInfo.deleteAllRows", query = "DELETE from Person")
 public class CityInfo implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     @Id
-    private int zipcode;
-    private String city;
-    @OneToMany(mappedBy = "cityinfo",
-        fetch=FetchType.LAZY,
+    private int zip;
+    private String cityName;
+    @OneToMany(mappedBy = "cityInfo", fetch=FetchType.LAZY,
         cascade = CascadeType.ALL,  
         orphanRemoval = true
     )
-    private List<Address> addresses;
+    private List<Address> address = new ArrayList();;
 
     public CityInfo() {
     }
 
-    public CityInfo(int zipcode, String city) {
-        this.zipcode = zipcode;
-        this.city = city;
+    public CityInfo(int zip) {
+        this.zip = zip;
     }
 
-    public CityInfo(int zipcode) {
-        this.zipcode = zipcode;
+    public CityInfo(String cityName) {
+        this.cityName = cityName;
     }
 
-    public int getZipcode() {
-        return zipcode;
+    public int getZip() {
+        return zip;
     }
 
-    public void setZipcode(int zipcode) {
-        this.zipcode = zipcode;
+    public void setZip(int zip) {
+        this.zip = zip;
     }
 
-    public String getCity() {
-        return city;
+    public String getCityName() {
+        return cityName;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
-    public List<Address> getAddresses() {
-        return addresses;
-    }
-
-    public void setAddresses(List<Address> addresses) {
-        this.addresses = addresses;
-    }
-
+    
+    
 }

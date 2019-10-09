@@ -5,7 +5,7 @@
  */
 package dto;
 
-import java.util.Objects;
+import entities.Phone;
 
 /**
  *
@@ -13,76 +13,28 @@ import java.util.Objects;
  */
 public class PhoneDTO {
     
-    private Long id;
     private String number;
-    private String descritpion;
+    private String description;
 
     public PhoneDTO() {
     }
 
-    public PhoneDTO(Long id, String number, String descritpion) {
-        this.id = id;
+    public PhoneDTO(String number, String description) {
         this.number = number;
-        this.descritpion = descritpion;
+        this.description = description;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    PhoneDTO(Phone phone) {
+        this.number = phone.getNumber();
+        this.description = phone.getDescription();
     }
 
     public String getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public String getDescription() {
+        return description;
     }
-
-    public String getDescritpion() {
-        return descritpion;
-    }
-
-    public void setDescritpion(String descritpion) {
-        this.descritpion = descritpion;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.id);
-        hash = 37 * hash + Objects.hashCode(this.number);
-        hash = 37 * hash + Objects.hashCode(this.descritpion);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final PhoneDTO other = (PhoneDTO) obj;
-        if (!Objects.equals(this.number, other.number)) {
-            return false;
-        }
-        if (!Objects.equals(this.descritpion, other.descritpion)) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
-    }
-    
-    
     
 }
