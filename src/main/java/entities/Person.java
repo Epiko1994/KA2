@@ -34,7 +34,6 @@ public class Person implements Serializable {
     private List<Phone> phone;
 
     public Person() {
-
     }
 
     public Person(String email, String firstname, String lastname, Address address, List<Hobby> hobbies, List<Phone> phone) {
