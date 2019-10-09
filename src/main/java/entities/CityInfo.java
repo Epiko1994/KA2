@@ -12,7 +12,11 @@ public class CityInfo implements Serializable {
     @Id
     private int zipcode;
     private String city;
-    @OneToMany(mappedBy = "cityinfo")
+    @OneToMany(mappedBy = "cityinfo",
+        fetch=FetchType.LAZY,
+        cascade = CascadeType.ALL,  
+        orphanRemoval = true
+    )
     private List<Address> addresses;
 
     public CityInfo() {
@@ -21,6 +25,10 @@ public class CityInfo implements Serializable {
     public CityInfo(int zipcode, String city) {
         this.zipcode = zipcode;
         this.city = city;
+    }
+
+    public CityInfo(int zipcode) {
+        this.zipcode = zipcode;
     }
 
     public int getZipcode() {

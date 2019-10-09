@@ -12,7 +12,7 @@ public class Phone implements Serializable {
     @Id
     private String number;
     private String descritpion;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Person person;
 
     public Phone() {

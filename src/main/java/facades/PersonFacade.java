@@ -71,11 +71,13 @@ public class PersonFacade {
         }
         List<Phone> phoneList = new ArrayList<>();
         for (int i = 0; i < 1; i++) {
-            Phone tempPhone = new Phone("phones.get(i).getNumber()", "phones.get(i).getDescritpion()");
+            Phone tempPhone = new Phone(phones.get(i).getNumber(),phones.get(i).getDescritpion());
             phoneList.add(tempPhone);
         }
-        CityInfo cI = new CityInfo(zip, "Bynavn");
-        Address a = new Address(address, cI);
+        CityInfo cI = new CityInfo(zip);
+        Address a = new Address(address);
+        a.setCityinfo(cI);
+ 
         Person person = new Person(email, firstname, lastname, a, hobbyList, phoneList);
         try {
             em.getTransaction().begin();

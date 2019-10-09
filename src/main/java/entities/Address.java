@@ -15,17 +15,20 @@ public class Address implements Serializable {
     private Long id;
     private String street;
     private String additionalInfo;
-    @OneToMany(mappedBy = "address")
+    @OneToMany(mappedBy = "address",fetch=FetchType.LAZY,
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
     private List<Person> persons;
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name = "ZIPCODE")
     private CityInfo cityinfo;
 
     public Address() {
     }
 
-    public Address(String street, CityInfo cityinfo) {
+    public Address(String street) {
         this.street = street;
-        this.cityinfo = cityinfo;
     }
 
     public Address(String street, String additionalInfo, List<Person> persons, CityInfo cityinfo) {
@@ -34,8 +37,6 @@ public class Address implements Serializable {
         this.persons = persons;
         this.cityinfo = cityinfo;
     }
-    
-    
 
     public Long getId() {
         return id;

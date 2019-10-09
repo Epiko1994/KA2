@@ -12,16 +12,25 @@ public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="ID")
     private Long id;
     private String email;
     private String firstname;
     private String lastname;
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY,cascade = CascadeType.PERSIST)
     private Address address;
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.LAZY,cascade = CascadeType.PERSIST)
+    @JoinTable(
+    name="PERSON_HOBBY",
+    joinColumns=@JoinColumn(name="persons_ID", referencedColumnName="ID"),
+    inverseJoinColumns=@JoinColumn(name="hobbies_ID", referencedColumnName="ID"))
+    
     private List<Hobby> hobbies;
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "person",fetch=FetchType.LAZY,
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
     private List<Phone> phone;
 
     public Person() {

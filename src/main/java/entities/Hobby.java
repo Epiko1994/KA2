@@ -12,10 +12,17 @@ public class Hobby implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="ID")
     private Long id;
     private String name;
     private String description;
-    @ManyToMany(mappedBy = "hobbies")
+    
+    @ManyToMany(mappedBy = "hobbies",fetch=FetchType.LAZY,cascade = CascadeType.PERSIST)
+    @JoinTable(
+    name="PERSON_HOBBY",
+    joinColumns=@JoinColumn(name="persons_ID", referencedColumnName="ID"),
+    inverseJoinColumns=@JoinColumn(name="hobbies_ID", referencedColumnName="ID"))
+   
     private List<Person> persons;
 
     public Hobby() {
