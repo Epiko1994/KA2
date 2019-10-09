@@ -11,17 +11,8 @@ var navbar = '\
           <span class="sr-only">(current)</span>\
         </a>\
       </li>\
-      <li class="nav-item">\
-        <a class="nav-link" href="wdw.html">Who did what</a>\
-      </li>\
-      <li class="nav-item">\
-        <a class="nav-link" href="joke.html">Cool Jokes</a>\
-      </li>\
-      <li class="nav-item">\
-            <a class="nav-link" href="car.html">Car Sale</a>\
-        </li>\
         <li class="nav-item">\
-        <a class="nav-link" href="https://github.com/UlrikHolm/KA1">Github Repo</a>\
+        <a class="nav-link" href="https://github.com/epiko1994/KA2">Github Repo</a>\
       </li>\
     </ul>\
   </div>\
