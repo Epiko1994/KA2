@@ -30,7 +30,7 @@ public class Address implements Serializable {
     private Long id;
     private String street;
     private String additionalInfo;
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.DETACH)
     private CityInfo cityInfo;
     @OneToMany(mappedBy = "address",fetch=FetchType.LAZY,
         cascade = CascadeType.ALL,

@@ -34,7 +34,7 @@ public class PersonDTO {
         this.email = p.getEmail();
         this.firstName = p.getFirstName();
         this.lastName = p.getLastName();
-//        this.address = p.getAddress().getStreet();
+        this.address = p.getAddress().getStreet();
         this.city = p.getAddress().getCityInfo().getZip() + " " + p.getAddress().getCityInfo().getCityName();
         
         for (Hobby hobby : p.getHobbies()){ 
@@ -48,6 +48,10 @@ public class PersonDTO {
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getEmail() {

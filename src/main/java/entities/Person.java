@@ -28,9 +28,9 @@ public class Person implements Serializable {
     private String email;
     private String firstName;
     private String lastName;
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     private Address address;
-    @ManyToMany(fetch=FetchType.LAZY,cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.DETACH)
     @JoinTable(
     name="PERSON_HOBBY",
     joinColumns=@JoinColumn(name="persons_ID", referencedColumnName="ID"),

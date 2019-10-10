@@ -41,6 +41,12 @@ public class Phone implements Serializable {
         this.number = p.getNumber();
         this.description = p.getDescription();
     }
+    
+    public Phone(PhoneDTO p, Person person) {
+        this.number = p.getNumber();
+        this.description = p.getDescription();
+        this.person = person;
+    }
 
     public String getNumber() {
         return number;

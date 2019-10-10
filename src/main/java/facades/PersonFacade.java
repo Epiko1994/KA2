@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -184,7 +186,7 @@ public class PersonFacade {
         return person;
     }
     
-        public PersonDTO deletePerson(Long id){
+    public PersonDTO deletePerson(Long id){
         EntityManager em = getEntityManager();
         Person p = em.find(Person.class, id);
         Address a = p.getAddress();
@@ -194,6 +196,66 @@ public class PersonFacade {
         em.close();
         return new PersonDTO(p);
     }
-    
+        
+        public Person editPerson(PersonDTO p) {
+        EntityManager em = getEntityManager();
+        Person personDB = em.find(Person.class, p.getId());
+        
+        personDB.setFirstName(p.getFirstName());
+        personDB.setLastName(p.getLastName());
+        personDB.setEmail(p.getEmail());
+        
+        List<Phone> phoneList = new ArrayList<>();
+        for (PhoneDTO ph : p.getPhones()) {
+            System.out.println("NUMMER: " + ph.getNumber());
+            phoneList.add(new Phone(ph, personDB));
+        }        
+        personDB.setPhones(phoneList);
+        
+        List<Hobby> hobbyList = new ArrayList();
+        for (HobbyDTO h : p.getHobbies()) {
+            hobbyList.add(new Hobby(h));
+        }
+        personDB.setHobbies(hobbyList);
+//        Address newAddress = new Address(p.getAddress(),"ddInfo");
+//        personDB.setAddress(newAddress);
+        
+        Address add = findAddress(personDB.getAddress().getStreet(), personDB.getAddress().getCityInfo().getZip());
+            System.out.println("HER ER ADD: >>>>>>>>>>" + add);
+            System.out.println(add.getId() + " " + add.getStreet() + " " + add.getCityInfo().getZip());
 
+//                Address address = findAddress(p.getAddress(), Integer.parseInt(p.getCity()));
+//                address = em.merge(address);
+//                personDB.setAddress(address);
+        add.setStreet(p.getAddress());
+//        CityInfo ci = new CityInfo(Integer.parseInt(p.getCity()));
+        add.getCityInfo().setZip(Integer.parseInt(p.getCity()));
+        em.merge(add);
+        
+        try {
+            em.getTransaction().begin();
+            em.merge(personDB);
+            em.getTransaction().commit();
+        return personDB;
+        } finally {
+            em.close();
+        }
+    }
+          
+        public Address findAddress(String street, int zip){
+            System.out.println(street + " " + zip);
+        EntityManager em = getEntityManager();
+        Address address = null;
+            TypedQuery<Address> tq = em.createQuery("SELECT a FROM Address a WHERE a.cityInfo.zip = :zip AND a.street = :street", Address.class);
+            tq.setParameter("zip", zip);
+            tq.setParameter("street", street);
+        try {
+            address = tq.getSingleResult();
+        } catch (NonUniqueResultException e){
+            return tq.getResultList().get(1);
+        } catch (NoResultException e) {
+            System.out.println("ADDRESSE IKKE FUNDET");
+        }
+        return address;
+    }
 }
