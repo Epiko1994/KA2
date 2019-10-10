@@ -28,7 +28,7 @@ public class Person implements Serializable {
     private String email;
     private String firstName;
     private String lastName;
-    @ManyToOne(fetch=FetchType.LAZY,cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
     private Address address;
     @ManyToMany(fetch=FetchType.LAZY,cascade = CascadeType.PERSIST)
     @JoinTable(
@@ -51,6 +51,13 @@ public class Person implements Serializable {
         this.lastName = lastName;
         this.address = address;
     }
+
+    public Person(String email, String firstName, String lastName) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    
         
     public Long getId() {
         return id;

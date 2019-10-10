@@ -5,6 +5,7 @@
  */
 package entities;
 
+import dto.HobbyDTO;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class Hobby implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
@@ -45,6 +46,12 @@ public class Hobby implements Serializable {
     public Hobby(String name, String description) {
         this.name = name;
         this.description = description;
+    }
+
+    public Hobby(HobbyDTO h) {
+        this.id = h.getId();
+        this.name = h.getName();
+        this.description = h.getDescription();
     }
 
     public String getName() {

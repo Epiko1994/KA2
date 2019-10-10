@@ -43,7 +43,7 @@ public class PersonResource {
     @Produces({MediaType.APPLICATION_JSON})
     public String getPerson(Person entity, @PathParam("id") long id) {
         Person p = FACADE.getPersonById(id);
-        return GSON.toJson(p);
+        return GSON.toJson(new PersonDTO(p));
     }
     
     @Path("hobby/{hobby}")
@@ -101,8 +101,8 @@ public class PersonResource {
    public String addPerson(String person){
         PersonDTO p = GSON.fromJson(person, PersonDTO.class);
         Person pNew = FACADE.addPerson(p);
-        return GSON.toJson(pNew); //return GSON.toJson(new dto.Person(pNew));
+        return GSON.toJson(new PersonDTO(pNew)); //return GSON.toJson(new dto.Person(pNew));
     }
-
+   
  
 }

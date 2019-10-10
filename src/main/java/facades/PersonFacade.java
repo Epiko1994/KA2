@@ -1,10 +1,14 @@
 package facades;
 
 import dto.CityInfoDTO;
+import dto.HobbyDTO;
 import dto.PersonDTO;
+import dto.PhoneDTO;
 import entities.Address;
 import entities.CityInfo;
+import entities.Hobby;
 import entities.Person;
+import entities.Phone;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -143,11 +147,41 @@ public class PersonFacade {
     public Person addPerson(PersonDTO p) {
         EntityManager em = getEntityManager();
         Address a = new Address(p.getAddress(), "additionalInfo");
-        a.setCityInfo(new CityInfo(p.getCity()));
-        System.out.println(p.getCity());
-        Person person = new Person(p.getEmail(),p.getFirstName(), p.getLastName(), a);
+        System.out.println(Integer.valueOf(p.getCity()));
+        
+        List<Hobby> hobbyList = new ArrayList();
+        for (HobbyDTO h : p.getHobbies()) {
+            hobbyList.add(new Hobby(h));
+        }
+        
+        List<Phone> phoneList = new ArrayList<>();
+        for (PhoneDTO ph : p.getPhones()) {
+            System.out.println("NUMMER: " + ph.getNumber());
+            phoneList.add(new Phone(ph));
+        }
+            
+        CityInfo ci = new CityInfo(Integer.valueOf(p.getCity()));
+        a.setCityInfo(ci);
+        //Address mergedAddress = em.merge(a);
+        Person person = new Person(p.getEmail(),p.getFirstName(), p.getLastName());
+        person.setAddress(a);
+        person.setHobbies(hobbyList);
+        
+
+        for (Phone ph : phoneList) {
+            person.addPhone(ph);
+        }
+        
+//        for (Hobby h : hobbyList) {
+//            Hobby mergedHobby = em.merge(h);
+//            person.addHobby(h);
+//        }     
+
+
         try {
-            em.getTransaction().begin();
+            em.getTransaction().begin();   
+//            Address mergedAddress = em.merge(a);
+//            person.setAddress(mergedAddress);            
             em.persist(person);
             em.getTransaction().commit();
         } finally {

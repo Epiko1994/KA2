@@ -5,6 +5,7 @@
  */
 package entities;
 
+import dto.PhoneDTO;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -20,7 +21,8 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 public class Phone implements Serializable {
-
+    
+    private static final long serialVersionUID = 1L;
     @Id
     private String number;
     private String description;
@@ -30,9 +32,14 @@ public class Phone implements Serializable {
     public Phone() {
     }
 
-    public Phone(String description, Person person) {
+    public Phone(String number, String description) {
+        this.number = number;
         this.description = description;
-        this.person = person;
+    }
+
+    public Phone(PhoneDTO p) {
+        this.number = p.getNumber();
+        this.description = p.getDescription();
     }
 
     public String getNumber() {
@@ -50,8 +57,6 @@ public class Phone implements Serializable {
     public void setPerson(Person person) {
         this.person = person;
     }
-    
-    
 
     public String getDescription() {
         return description;
@@ -60,7 +65,5 @@ public class Phone implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-    
-    
-    
+        
 }
