@@ -35,7 +35,7 @@ public class Person implements Serializable {
     name="PERSON_HOBBY",
     joinColumns=@JoinColumn(name="persons_ID", referencedColumnName="ID"),
     inverseJoinColumns=@JoinColumn(name="hobbies_ID", referencedColumnName="ID"))
-    private List<Hobby> hobbies = new ArrayList();;
+    private List<Hobby> hobbies = new ArrayList();
     @OneToMany(mappedBy = "person",fetch=FetchType.LAZY,
         cascade = CascadeType.ALL,
         orphanRemoval = true

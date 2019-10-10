@@ -133,7 +133,6 @@ public class PersonFacade {
         }
     }
     
-    
     public Person getPersonById(long id) {
         EntityManager em = getEntityManager();
         try {
@@ -162,32 +161,38 @@ public class PersonFacade {
             
         CityInfo ci = new CityInfo(Integer.valueOf(p.getCity()));
         a.setCityInfo(ci);
-        //Address mergedAddress = em.merge(a);
         Person person = new Person(p.getEmail(),p.getFirstName(), p.getLastName());
         person.setAddress(a);
-        person.setHobbies(hobbyList);
-        
+//        person.setHobbies(hobbyList);
 
         for (Phone ph : phoneList) {
             person.addPhone(ph);
         }
         
-//        for (Hobby h : hobbyList) {
-//            Hobby mergedHobby = em.merge(h);
-//            person.addHobby(h);
-//        }     
-
+        for (Hobby h : hobbyList) {
+            //Hobby mergedHobby = em.merge(h);
+            person.addHobby(h);
+        }    
 
         try {
-            em.getTransaction().begin();   
-//            Address mergedAddress = em.merge(a);
-//            person.setAddress(mergedAddress);            
+            em.getTransaction().begin();        
             em.persist(person);
             em.getTransaction().commit();
         } finally {
             em.close();
         }
         return person;
+    }
+    
+        public PersonDTO deletePerson(Long id){
+        EntityManager em = getEntityManager();
+        Person p = em.find(Person.class, id);
+        Address a = p.getAddress();
+        em.getTransaction().begin();
+        em.remove(p);
+        em.getTransaction().commit();
+        em.close();
+        return new PersonDTO(p);
     }
     
 
