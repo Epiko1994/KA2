@@ -73,6 +73,17 @@ public class PersonFacade {
         return personsDTO;
     }
 
+    public List<HobbyDTO> getAllHobbies() {
+        EntityManager em = getEntityManager();
+        TypedQuery<Hobby> tq = em.createQuery("SELECT h FROM Hobby h", Hobby.class);
+        List<Hobby> hobbies = tq.getResultList();
+        List<HobbyDTO> hobbiesDTO = new ArrayList<>();
+        em.close();
+        for (Hobby hobby : hobbies) {
+            hobbiesDTO.add(new HobbyDTO(hobby));
+        }
+        return hobbiesDTO;
+    }
     
     public List<PersonDTO> getPersonsByHobby(String hobby) {
         EntityManager em = getEntityManager();

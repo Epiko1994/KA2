@@ -3,6 +3,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dto.CityInfoDTO;
+import dto.HobbyDTO;
 import dto.PersonDTO;
 import entities.Person;
 import utils.EMF_Creator;
@@ -133,6 +134,14 @@ public class PersonResource {
     public String getAll() {
         List<PersonDTO> persons = FACADE.getAllPersons();
         return GSON.toJson(persons);
+    }
+    
+    @Path("hobby/all")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getAllHobbies() {
+        List<HobbyDTO> hobbies = FACADE.getAllHobbies();
+        return GSON.toJson(hobbies);
     }
  
 }
