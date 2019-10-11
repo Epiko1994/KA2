@@ -26,13 +26,7 @@ public class ApplicationConfig extends Application {
      * out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider.class);
-        resources.add(com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider.class);
         resources.add(errorhandling.GenericExceptionMapper.class);
-        resources.add(io.swagger.v3.jaxrs2.SwaggerSerializers.class);
-        resources.add(io.swagger.v3.jaxrs2.integration.resources.AcceptHeaderOpenApiResource.class);
-        resources.add(io.swagger.v3.jaxrs2.integration.resources.OpenApiResource.class);
-        resources.add(org.glassfish.jersey.jsonb.internal.JsonBindingProvider.class);
         resources.add(org.glassfish.jersey.server.wadl.internal.WadlResource.class);
         resources.add(rest.PersonResource.class);
     }

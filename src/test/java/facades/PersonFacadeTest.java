@@ -1,7 +1,11 @@
 package facades;
 
+import dto.CityInfoDTO;
+import entities.Address;
+import entities.CityInfo;
 import utils.EMF_Creator;
 import entities.Person;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.AfterAll;
@@ -16,13 +20,13 @@ import utils.EMF_Creator.DbSelector;
 import utils.EMF_Creator.Strategy;
 
 //Uncomment the line below, to temporarily disable this test
-@Disabled
-public class FacadeExampleTest {
+//@Disabled
+public class PersonFacadeTest {
 
     private static EntityManagerFactory emf;
     private static PersonFacade facade;
 
-    public FacadeExampleTest() {
+    public PersonFacadeTest() {
     }
 
     //@BeforeAll
@@ -60,9 +64,14 @@ public class FacadeExampleTest {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            //em.createNamedQuery("RenameMe.deleteAllRows").executeUpdate();
-//            em.persist(new Person("hej@hej.dk", "Jor", "Hansen"));
-//            em.persist(new Person("hej@mail.dk", "Per", "Jensen"));
+            em.createNamedQuery("Person.deleteAllRows").executeUpdate();
+            em.createNamedQuery("CityInfo.deleteAllRows").executeUpdate();
+     
+            em.persist(new CityInfo(3700,"Rønne"));
+            em.persist(new CityInfo(3730,"Nexø"));
+            
+            em.persist(new Person("hej@hej.dk", "Jor", "Hansen",new Address("Rønnegade 5","anden etage")));
+            em.persist(new Person("hej@mail.dk", "Per", "Jensen",new Address("jeppesmørvej 2","gaard")));
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -72,12 +81,29 @@ public class FacadeExampleTest {
     @AfterEach
     public void tearDown() {
 //        Remove any data after each test was run
+            EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.createNamedQuery("Person.deleteAllRows").executeUpdate();
+            em.createNamedQuery("Address.deleteAllRows").executeUpdate();
+            em.createNamedQuery("CityInfo.deleteAllRows").executeUpdate();
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
     }
 
     // TODO: Delete or change this method 
-//    @Test
-//    public void testAFacadeMethod() {
-//        assertEquals(2, facade.getPersonCount(), "Expects two rows in the database");
-//    }
+    @Test
+    public void testPersonFacadeMethod() {
+        assertEquals(2, facade.getPersonCount(), "Expects two rows in the database");
+    }
+    
+    
+    @Test
+    public void testGetAllCityInfos() {
+        List<CityInfoDTO> result = facade.getAllCityInfos();
+        assertEquals(2, result.size());   
+    }
 
 }
