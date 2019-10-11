@@ -3,12 +3,14 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dto.CityInfoDTO;
+import dto.HobbyDTO;
 import dto.PersonDTO;
 import entities.Person;
 import utils.EMF_Creator;
 import facades.PersonFacade;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.Consumes;
@@ -124,6 +126,22 @@ public class PersonResource {
         p.setId(id);
         Person pNew = FACADE.editPerson(p);
         return GSON.toJson(new PersonDTO(pNew));
+    }
+    
+    @Path("all")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getAll() {
+        List<PersonDTO> persons = FACADE.getAllPersons();
+        return GSON.toJson(persons);
+    }
+    
+    @Path("hobby/all")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getAllHobbies() {
+        List<HobbyDTO> hobbies = FACADE.getAllHobbies();
+        return GSON.toJson(hobbies);
     }
  
 }

@@ -1,34 +1,71 @@
-var url = '../api/person/'
+var url = '../KA2/api/person/'
+//'https://jjugroup.ga/KA1/api/car/'
 
-var carTable = document.getElementById('person_table');
+var personTable = document.getElementById('persons_table');
+var hobbyList = document.getElementById('hobbyList');
 
-function mapper(array){
+function personMapper(array){
 
     var c = array.map(el=>'<tr><td>'+el.id+'</td>\n\
-    <td>'+el.year+'</td>\n\
-    <td>'+el.make+'</td>\n\
-    <td>'+el.model+'</td>\n\
-    <td>'+el.price+'</td></tr>');
+    <td>'+el.email+'</td>\n\
+    <td>'+el.firstName+'</td>\n\
+    <td>'+el.lastName+'</td>\n\
+    <td>'+el.address+'</td>\n\
+    <td>'+el.city+'</td>\n\
+    <td>'+hobbyMapper(el.hobbies)+'</td>\n\
+    <td>'+phoneMapper(el.phones)+'</td></tr>');
     return c.join('');
 }
+
+function hobbyMapper(hobbies){
+    const map1 = hobbies.map(el=> el.name);
+    return map1.join(', ');
+    }
+
+function phoneMapper(phones){
+    const map1 = phones.map(el=> el.description + ": " + el.number);
+    return map1.join(', ');
+    }
+
+function hobbyListMapper(array){
+
+        var c = array.map(el=>'<div class="form-check"><input class="form-check-input" type="checkbox" value="" id="' + el.id + '">\n\
+        <label class="form-check-label" for="'+ el.id +'">\n\
+        ' + el.name+ '</label></div>');
+        return c.join('');
+    }
 
 var persons;
 //console.log(mapper(cars))
 //carTable.innerHTML = mapper(cars);
-window.onload = allPersons();
+window.onload = function(){
+    allPersons();
+    allHobbies();
+}
 var urlAll = url + 'all';
 
 function allPersons(){
 fetch(urlAll)
     .then(res => res.json())
     .then(data => {
-        carTable.innerHTML = mapper(data);
+        personTable.innerHTML = personMapper(data);
         persons = data;
-        filteredpersons = persons;
         });
     };
 
-var filteredpersons = persons;
+var hobbies;
+
+var urlAllh = url + 'hobby/all';
+
+function allHobbies(){
+        fetch(urlAllh)
+            .then(res => res.json())
+            .then(data => {
+                console.log(hobbyListMapper(data))
+                hobbyList.innerHTML = hobbyListMapper(data);
+                hobbies = data;
+                });
+            };
 
 btn1.onclick = function(){
     var inputFrom = document.getElementById("input1").value;
@@ -70,26 +107,6 @@ btn2.onclick = function(){
 
     //console.log(selectedSort);
     
-};
-
-
-btn3.onclick = function(){
-    var inputMake = document.getElementById("input3").value;
-    if(inputMake === ''){
-    alert('Please enter make')
-    }
-     else {
-        var urlMake = url + 'make/' + inputMake;
-        fetch(urlMake)
-        .then(res => res.json())
-        .then(data => {
-        carTable.innerHTML = mapper(data);
-        cars = data;
-        filteredcars = cars;
-        });
-
-    carTable.innerHTML = mapper(filteredcars);
-}
 };
 
 btn4.onclick = allCars;

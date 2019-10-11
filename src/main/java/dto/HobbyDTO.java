@@ -29,7 +29,8 @@ public class HobbyDTO {
         this.description = description;
     }
 
-    HobbyDTO(Hobby hobby) {
+    public HobbyDTO(Hobby hobby) {
+        this.id = hobby.getId();
         this.name = hobby.getName();
         this.description = hobby.getDescription();
     }

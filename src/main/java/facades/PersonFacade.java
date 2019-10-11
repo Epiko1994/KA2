@@ -61,6 +61,30 @@ public class PersonFacade {
         
     }
     
+    public List<PersonDTO> getAllPersons() {
+        EntityManager em = getEntityManager();
+        TypedQuery<Person> tq = em.createQuery("SELECT p FROM Person p", Person.class);
+        List<Person> persons = tq.getResultList();
+        List<PersonDTO> personsDTO = new ArrayList<>();
+        em.close();
+        for (Person person : persons) {
+            personsDTO.add(new PersonDTO(person));
+        }
+        return personsDTO;
+    }
+
+    public List<HobbyDTO> getAllHobbies() {
+        EntityManager em = getEntityManager();
+        TypedQuery<Hobby> tq = em.createQuery("SELECT h FROM Hobby h", Hobby.class);
+        List<Hobby> hobbies = tq.getResultList();
+        List<HobbyDTO> hobbiesDTO = new ArrayList<>();
+        em.close();
+        for (Hobby hobby : hobbies) {
+            hobbiesDTO.add(new HobbyDTO(hobby));
+        }
+        return hobbiesDTO;
+    }
+    
     public List<PersonDTO> getPersonsByHobby(String hobby) {
         EntityManager em = getEntityManager();
 
