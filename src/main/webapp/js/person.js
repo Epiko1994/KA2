@@ -4,109 +4,109 @@ var url = '../KA2/api/person/'
 var personTable = document.getElementById('persons_table');
 var hobbyList = document.getElementById('hobbyList');
 
-function personMapper(array){
+function personMapper(array) {
 
-    var c = array.map(el=>'<tr><td>'+el.id+'</td>\n\
-    <td>'+el.email+'</td>\n\
-    <td>'+el.firstName+'</td>\n\
-    <td>'+el.lastName+'</td>\n\
-    <td>'+el.address+'</td>\n\
-    <td>'+el.city+'</td>\n\
-    <td>'+hobbyMapper(el.hobbies)+'</td>\n\
-    <td>'+phoneMapper(el.phones)+'</td></tr>');
+    var c = array.map(el => '<tr><td>' + el.id + '</td>\n\
+    <td>'+ el.email + '</td>\n\
+    <td>'+ el.firstName + '</td>\n\
+    <td>'+ el.lastName + '</td>\n\
+    <td>'+ el.address + '</td>\n\
+    <td>'+ el.city + '</td>\n\
+    <td>'+ hobbyMapper(el.hobbies) + '</td>\n\
+    <td>'+ phoneMapper(el.phones) + '</td></tr>');
     return c.join('');
 }
 
-function hobbyMapper(hobbies){
-    const map1 = hobbies.map(el=> el.name);
+function hobbyMapper(hobbies) {
+    const map1 = hobbies.map(el => el.name);
     return map1.join(', ');
-    }
+}
 
-function phoneMapper(phones){
-    const map1 = phones.map(el=> el.description + ": " + el.number);
+function phoneMapper(phones) {
+    const map1 = phones.map(el => el.description + ": " + el.number);
     return map1.join(', ');
-    }
+}
 
-function hobbyListMapper(array){
+function hobbyListMapper(array) {
 
-        var c = array.map(el=>'<div class="form-check"><input class="form-check-input" type="checkbox" value="" id="' + el.id + '">\n\
-        <label class="form-check-label" for="'+ el.id +'">\n\
-        ' + el.name+ '</label></div>');
-        return c.join('');
-    }
+    var c = array.map(el => '<div class="form-check"><input class="form-check-input" type="checkbox" id="' + el.id + '">\n\
+        <label class="form-check-label" for="'+ el.id + '">\n\
+        ' + el.name + '</label></div>');
+    return c.join('');
+}
 
 var persons;
 //console.log(mapper(cars))
 //carTable.innerHTML = mapper(cars);
-window.onload = function(){
+window.onload = function () {
     allPersons();
     allHobbies();
 }
 var urlAll = url + 'all';
 
-function allPersons(){
-fetch(urlAll)
-    .then(res => res.json())
-    .then(data => {
-        personTable.innerHTML = personMapper(data);
-        persons = data;
+function allPersons() {
+    fetch(urlAll)
+        .then(res => res.json())
+        .then(data => {
+            personTable.innerHTML = personMapper(data);
+            persons = data;
         });
-    };
+};
 
 var hobbies;
 
 var urlAllh = url + 'hobby/all';
 
-function allHobbies(){
-        fetch(urlAllh)
-            .then(res => res.json())
-            .then(data => {
-                console.log(hobbyListMapper(data))
-                hobbyList.innerHTML = hobbyListMapper(data);
-                hobbies = data;
-                });
-            };
-
-btn1.onclick = function(){
-    var inputFrom = document.getElementById("input1").value;
-    var inputTo = document.getElementById("input2").value;
-if (inputFrom === '' || inputTo === ''){
-    if(inputFrom === ''){
-    alert('Please enter min price!')
-    }if (inputTo === ''){
-    alert('Please enter max price!')
-    }
-} else {
-    filteredcars = cars.filter(function(el){return el.price >= inputFrom && el.price <= inputTo});
-    carTable.innerHTML = mapper(filteredcars);
-}
+function allHobbies() {
+    fetch(urlAllh)
+        .then(res => res.json())
+        .then(data => {
+            hobbyList.innerHTML = hobbyListMapper(data);
+            hobbies = data;
+        });
 };
 
-function sorter(sortBy){
-    var key = sortBy;
-        function compare(a, b) {
-            const comA = a[key];
-            const comB = b[key];
-            let comparison = 0;
-            if (comA > comB) {
-            comparison = 1;
-            } else if (comA < comB) {
-            comparison = -1;
-            }
-            return comparison;
-        }
-  return compare;
-}
 
-btn2.onclick = function(){
-    var select = document.getElementById("inputGroupSelect01");
-    var selectedSort = select.options[select.selectedIndex].value;
-    carTable.innerHTML = mapper(filteredcars.sort(sorter(selectedSort)));
-
-    //console.log(cars.sort(dynamicSort(selectedSort)));
-
-    //console.log(selectedSort);
+let personPostBtn = document.getElementById('personPostBtn')
+personPostBtn.addEventListener('click', addPerson)
+function addPerson() {
+    var checkedHobbys = []
+    var temphobbys = hobbyList.children
+    for(var i = 0; i < temphobbys.length; i++) {
+        if (temphobbys.item(i).firstChild.checked == true){
+            checkedHobbys.push({id: temphobbys.item(i).firstChild.id})}
     
-};
+    }    
+    
+    let addPersonFirstName = document.getElementById('personFirstName').value
+    let addPersonLastName = document.getElementById('personLastName').value
+    let addPersonEmail = document.getElementById('personEmail').value
+    let addPersonAddress = document.getElementById('personAddress').value
+    let addPersonZip = document.getElementById('personZip').value
+    let addPersonPhoneType = document.getElementById('personPhoneType').value
+    let addPersonPhoneNumber = document.getElementById('personPhoneNumber').value
+    let options = {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "email": addPersonEmail,
+            "firstName": addPersonFirstName,
+            "lastName": addPersonLastName,
+            "address": addPersonAddress,
+            "city": addPersonZip,
+            "phones": [
+              {
+                "number": addPersonPhoneNumber,
+                "description": addPersonPhoneType
+              }
+            ],
+            "hobbies": checkedHobbys
+        })
+    }
 
-btn4.onclick = allCars;
+    fetch("../KA2/api/person", options)
+
+}

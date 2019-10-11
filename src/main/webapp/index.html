@@ -1,27 +1,178 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Start Page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
-    <body style="font-family: sans-serif;padding:8px;font-size: large">
-        <h2>Start Code for JPA and JAX-RS projects with support for OpenAPI Documentation</h2>
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <title>JJU Group</title>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top" id="nav">
+
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container bg-light">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h1 class="mt-5">Persons</h1>
+        <p class="lead">Meet people!</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-8">
         <div>
-            <a href="openapi">API-Documentation</a>
-            <p>Observe that the link above does NOT (yet) document your code, but the (in)famous Pet-store</p>
-            <p>In your browser test these two endpoints:</p>
-            <ul>
-                <li><code>/api/openapi.json</code></li>
-                <li><code>/api/openapi.yaml</code></li>
-            </ul>
-            <p>What is returned by these two endpoints (MIME type, and what does the content represent) </p>
-            <h4>TODO:</h4>
-            <ul>
-                <li>Open the file <em>index.html</em> in the folder <em>openapi</em></li>
-                <li>Locate the URL that points to the external petstore-API and replace with a (relative) link to one of the two endpoints given above</li>
-                <li>Refresh your browser (CTRL-F5) and click the link to the <em>API-Documentation</em> again</li>
-                <li>Verify that you get documentation for your own end-points</li>
-            </ul>
+          <div class="form-row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="First name" id="personFirstName">
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Last name" id="personLastName">
+            </div>
+          </div>
         </div>
-    </body>
+
+        <div>
+          <div class="form-row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Email" id="personEmail">
+            </div>
+          </div>
+        </div>
+
+        <div>
+            <div class="form-row">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Address" id="personAddress">
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Zip" id="personZip">
+              </div>
+            </div>
+          </div>
+          <div>
+              <div class="form-row">
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="Phone Type" id="personPhoneType">
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="Phone Number" id="personPhoneNumber">
+                </div>
+              </div>
+            </div>
+
+          <div class="form-check" id="hobbyList"></div>
+          <div class="col text-center">
+              <input class="btn btn-primary" type="button" id="personPostBtn" value="POST"></input>
+          </div>
+
+
+      </div>
+    </div>
+  </br>
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Email</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Address</th>
+              <th scope="col">City</th>
+              <th scope="col">Hobbies</th>
+              <th scope="col">Phones</th>
+            </tr>
+          </thead>
+          <tbody id="persons_table">
+          </tbody>
+        </table>
+      </div>
+      <div class="col" style="margin-top: 50px;"><hr></div>
+      <div class="col-lg-12">
+          <h2 class="text-center">Sprints</h2>
+            
+            <p>
+                <strong>Sprint one</strong> (Friday 04/10 - Monday 07/10): 
+            </p>
+            <ul>
+
+                <li>The API description must be almost (we are using an iterative process) complete and available as a page on your deployed project.
+
+                <li>The SCRUM plan for the three mini-sprints must be available as a page on your deployed project. This can either be a copy of our suggestion below, or Sprint-1 as given below and your own plan for the remaining sprints if your “product owner” agrees (red students).
+
+                <li>The CI-pipeline must be setup
+
+                <li>Some of the Entity Classes and the Facade(s) must be ready with supplementing tests
+                </li>
+            </ul>
+            <p>
+                <strong>Sprint two</strong> (Tuesday 8/10 - Wednesday 9/10):
+            </p>
+            <ul>
+
+                <li>Most of the Entity Classes should be ready
+
+                <li>Sample data should be available in the dev-database
+
+                <li>Some of the endpoints (as a minimum a GET, POST and PUT) must be ready with the corresponding DTO’s and integrations tests
+                </li>
+            </ul>
+            
+            <p>
+                <strong>Sprint three </strong>(Thursday 10/10- Sunday 13/10):
+            </p>
+            <ul>
+
+                <li>Complete the API (as much as you have time for)
+
+                <li>Implement a simple SPA which as a minimum must have the ability to use some of your GET endpoints and at least one POST endpoint. Consider pages like: 
+                    <ul>
+
+                        <li>Get all persons with a given hobby
+
+                        <li>Get all persons living in a given city (i.e. 2800 Lyngby)
+
+                        <li>Get the count of people with a given hobby
+
+                        <li>Get a list of all zip codes in Denmark
+
+                        <li>Get a list of companies with more than xx employes
+
+                        <li>Create a Person (with hobbies, phone, address etc.)
+                        </li> 
+                    </ul>
+
+                <li>Complete documentation and prepare for your review presentation after the holiday</li>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/person.js"></script>
+</body>
+
 </html>
