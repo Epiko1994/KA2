@@ -1,9 +1,10 @@
 var url = '../KA2/api/person/'
 //'https://jjugroup.ga/KA1/api/car/'
 
-var carTable = document.getElementById('persons_table');
+var personTable = document.getElementById('persons_table');
+var hobbyList = document.getElementById('hobbyList');
 
-function mapper(array){
+function personMapper(array){
 
     var c = array.map(el=>'<tr><td>'+el.id+'</td>\n\
     <td>'+el.email+'</td>\n\
@@ -26,23 +27,45 @@ function phoneMapper(phones){
     return map1.join(', ');
     }
 
-var cars;
+function hobbyListMapper(array){
+
+        var c = array.map(el=>'<div class="form-check"><input class="form-check-input" type="checkbox" value="" id="' + el.id + '">\n\
+        <label class="form-check-label" for="'+ el.id +'">\n\
+        ' + el.name+ '</label></div>');
+        return c.join('');
+    }
+
+var persons;
 //console.log(mapper(cars))
 //carTable.innerHTML = mapper(cars);
-window.onload = allCars;
+window.onload = function(){
+    allPersons();
+    allHobbies();
+}
 var urlAll = url + 'all';
 
-function allCars(){
+function allPersons(){
 fetch(urlAll)
     .then(res => res.json())
     .then(data => {
-        carTable.innerHTML = mapper(data);
-        cars = data;
-        filteredcars = cars;
+        personTable.innerHTML = personMapper(data);
+        persons = data;
         });
     };
 
-var filteredcars = cars;
+var hobbies;
+
+var urlAllh = url + 'hobby/all';
+
+function allHobbies(){
+        fetch(urlAllh)
+            .then(res => res.json())
+            .then(data => {
+                console.log(hobbyListMapper(data))
+                hobbyList.innerHTML = hobbyListMapper(data);
+                hobbies = data;
+                });
+            };
 
 btn1.onclick = function(){
     var inputFrom = document.getElementById("input1").value;
@@ -84,26 +107,6 @@ btn2.onclick = function(){
 
     //console.log(selectedSort);
     
-};
-
-
-btn3.onclick = function(){
-    var inputMake = document.getElementById("input3").value;
-    if(inputMake === ''){
-    alert('Please enter make')
-    }
-     else {
-        var urlMake = url + 'make/' + inputMake;
-        fetch(urlMake)
-        .then(res => res.json())
-        .then(data => {
-        carTable.innerHTML = mapper(data);
-        cars = data;
-        filteredcars = cars;
-        });
-
-    carTable.innerHTML = mapper(filteredcars);
-}
 };
 
 btn4.onclick = allCars;
