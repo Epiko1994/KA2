@@ -14,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
@@ -21,6 +22,7 @@ import javax.persistence.OneToMany;
  * @author Ulrik
  */
 @Entity
+@NamedQuery(name = "CityInfo.deleteAllRows", query = "DELETE from CityInfo")
 public class CityInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,6 +43,11 @@ public class CityInfo implements Serializable {
     }
 
     public CityInfo(String cityName) {
+        this.cityName = cityName;
+    }
+    
+    public CityInfo(int zip,String cityName) {
+        this.zip = zip;
         this.cityName = cityName;
     }
 

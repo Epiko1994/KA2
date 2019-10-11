@@ -53,7 +53,7 @@ public class PersonFacade {
     public long getPersonCount(){
         EntityManager em = emf.createEntityManager();
         try{
-            long renameMeCount = (long)em.createQuery("SELECT COUNT(r) FROM Person p").getSingleResult();
+            long renameMeCount = (long)em.createQuery("SELECT COUNT(p) FROM Person p").getSingleResult();
             return renameMeCount;
         }finally{  
             em.close();
