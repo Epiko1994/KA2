@@ -1,7 +1,6 @@
-var url = 'https://jjugroup.ga/KA1/api/car/'
-//'https://jjugroup.ga/KA1/api/car/'
+var url = '../api/person/'
 
-var carTable = document.getElementById('car_table');
+var carTable = document.getElementById('person_table');
 
 function mapper(array){
 
@@ -13,23 +12,23 @@ function mapper(array){
     return c.join('');
 }
 
-var cars;
+var persons;
 //console.log(mapper(cars))
 //carTable.innerHTML = mapper(cars);
-window.onload = allCars;
+window.onload = allPersons();
 var urlAll = url + 'all';
 
-function allCars(){
+function allPersons(){
 fetch(urlAll)
     .then(res => res.json())
     .then(data => {
         carTable.innerHTML = mapper(data);
-        cars = data;
-        filteredcars = cars;
+        persons = data;
+        filteredpersons = persons;
         });
     };
 
-var filteredcars = cars;
+var filteredpersons = persons;
 
 btn1.onclick = function(){
     var inputFrom = document.getElementById("input1").value;
