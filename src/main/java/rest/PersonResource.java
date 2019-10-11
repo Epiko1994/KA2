@@ -2,21 +2,13 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dto.CityInfoDTO;
 import dto.PersonDTO;
-import entities.Hobby;
 import entities.Person;
 import utils.EMF_Creator;
 import facades.PersonFacade;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.info.Contact;
-import io.swagger.v3.oas.annotations.info.Info;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.servers.Server;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.Consumes;
@@ -28,13 +20,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
-@OpenAPIDefinition(
-        info = @Info(
-                title = "JJU GRoup",
-                version = "1.0",
-                description = "Backend of the CA2 project")
-        )
+import javax.ws.rs.core.Response;
 
 //Todo Remove or change relevant parts before ACTUAL use
 @Path("person")
@@ -42,132 +28,102 @@ public class PersonResource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(
                 "pu",
-                "jdbc:mysql://localhost:3307/ka2",
+                "jdbc:mysql://localhost:3307/KA2o",
                 "dev",
                 "ax2",
                 EMF_Creator.Strategy.CREATE);
     private static final PersonFacade FACADE =  PersonFacade.getFacadeExample(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-
+            
     @GET
-    @Path("count/{hobby}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(summary = "Get count of people with given hobby",
-            tags = {"person"},
-            responses = {
-                @ApiResponse(
-                        content = @Content(mediaType = "application/json")),
-                @ApiResponse(responseCode = "200", description = "The Requested hobby"),
-                @ApiResponse(responseCode = "400", description = "Hobby not found")})
-    public int getHobbyPersonsCount(@PathParam("hobby") String hobby) {
-        int hobbyPersonsCount = FACADE.getHobbyPersonsCount(hobby);
-        return hobbyPersonsCount;
-    }  
-    
-    @GET
-    @Path("/hobby/{hobby}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(summary = "Get list of persons by hobby",
-            tags = {"person"},
-            responses = {
-                @ApiResponse(
-                        content = @Content(mediaType = "application/json")),
-                @ApiResponse(responseCode = "200", description = "The Requested persons"),
-                @ApiResponse(responseCode = "400", description = "Hobby not found")})
-    public List<PersonDTO> getHobbyPersons(@PathParam("hobby") String hobby) {
-        List<PersonDTO> hobbyPersons = FACADE.getHobbyPersons(hobby);
-        return hobbyPersons;
-    }  
-    
-    @GET
-    @Path("zip/{zip}")
-    @Produces(MediaType.APPLICATION_JSON)   
-    @Operation(summary = "Get list of persons by zipcode",
-            tags = {"person"},
-            responses = {
-                @ApiResponse(
-                        content = @Content(mediaType = "application/json")),
-                @ApiResponse(responseCode = "200", description = "The Requested persons"),
-                @ApiResponse(responseCode = "400", description = "Zip not found")})
-    public List<Person> getPersonByZip(@PathParam("zip") long zip) {
-        List<Person> zipPersons = FACADE.getPersonByZip(zip);
-        return zipPersons;
-    }
-    
-    @GET
-    @Path("phone/{phone}")
-    @Produces(MediaType.APPLICATION_JSON)   
-    @Operation(summary = "Get information about a person by phone",
-            tags = {"person"},
-            responses = {
-                @ApiResponse(
-                        content = @Content(mediaType = "application/json")),
-                @ApiResponse(responseCode = "200", description = "The Requested person"),
-                @ApiResponse(responseCode = "400", description = "Person not found")})
-    public Person getPersonByPhone(@PathParam("phone") long phone) {
-        Person p = FACADE.getPersonByPhone(phone);
-        return p;
-    }
-    
-    @GET
-    @Path("{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(summary = "Get information about a person by id",
-            tags = {"person"},
-            responses = {
-                @ApiResponse(
-                        content = @Content(mediaType = "application/json")),
-                @ApiResponse(responseCode = "200", description = "The Requested person"),
-                @ApiResponse(responseCode = "400", description = "Person not found")})
-    public PersonDTO getPerson(@PathParam("id") long id) {
-        PersonDTO p = FACADE.getPersonById(id);
-        return p;
-    }
-    
-    @DELETE
-    @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    @Operation(summary = "Delete a person", tags = {"person"},
-            responses = {
-                @ApiResponse(responseCode = "200", description = "Person deleted"),
-                @ApiResponse(responseCode = "400", description = "Arguments missing to delete")
-            })
-     public String deletePerson(@PathParam("id") long id){
-        Person pDeleted = FACADE.deletePerson(id);
-        return "Personen er slettet!";
+    public String demo() {
+        return "{\"msg\":\"Hello World\"}";
     }
-
+    
+    @Path("{id}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getPerson(Person entity, @PathParam("id") long id) {
+        Person p = FACADE.getPersonById(id);
+        return GSON.toJson(new PersonDTO(p));
+    }
+    
+    @Path("hobby/{hobby}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<PersonDTO> getPersonsByHobby(Person entity, @PathParam("hobby") String hobby) {
+        List<PersonDTO> persons = FACADE.getPersonsByHobby(hobby);
+        return persons;
+    }
+    
+    @Path("hobby/count/{hobby}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public long getPersonCountByHobby(Person entity, @PathParam("hobby") String hobby) {
+        long personCount = FACADE.getPersonCountByHobby(hobby);
+        return personCount;
+    }
+    
+    @Path("zip/{zip}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<PersonDTO> getPersonsByZip(Person entity, @PathParam("zip") int zip) {
+        List<PersonDTO> persons = FACADE.getPersonsByZip(zip);
+        return persons;
+    }
+    
+    @Path("phone/{number}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public PersonDTO getPersonByPhone(Person entity, @PathParam("number") String number) {
+        PersonDTO person = FACADE.getPersonByPhone(number);
+        return person;
+    }
+    
+    @Path("count")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getRenameMeCount() {
+        long count = FACADE.getPersonCount();
+        //System.out.println("--------------->"+count);
+        return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
+    }
+    
+    @Path("cityinfo/all")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<CityInfoDTO> getAllZips() {
+        List<CityInfoDTO> cityInfoList = FACADE.getAllCityInfos();
+        return cityInfoList;
+    }  
+    
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    @Operation(summary = "Add a new person", tags = {"person"},
-            responses = {
-                @ApiResponse(responseCode = "200", description = "Person added"),
-                @ApiResponse(responseCode = "400", description = "Not all arguments provided with the body")
-            })
    public String addPerson(String person){
-        dto.PersonDTO p = GSON.fromJson(person, dto.PersonDTO.class);
-        Person pNew = FACADE.addPerson(p.getEmail(), p.getFirstname(), p.getLastname(), p.getAddress(), p.getZip(), p.getHobbies(), p.getPhone());
-        return GSON.toJson(pNew); //return GSON.toJson(new dto.Person(pNew));
+        PersonDTO p = GSON.fromJson(person, PersonDTO.class);
+        Person pNew = FACADE.addPerson(p);
+        return GSON.toJson(new PersonDTO(pNew)); //return GSON.toJson(new dto.Person(pNew));
     }
-
+   
+    @DELETE
+    @Path("/{id}")
+    public Response deletePerson(@PathParam("id") Long id){
+        PersonDTO pdto = FACADE.deletePerson(id);
+        return Response.ok(GSON.toJson(pdto)).build();
+    }
+    
+    
     @PUT
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    @Operation(summary = "Edit a person", tags = {"person"},
-            responses = {
-                @ApiResponse(responseCode = "200", description = "Person edited"),
-                @ApiResponse(responseCode = "400", description = "Arguments missing with the body to edit")
-            })
     public String updatePerson(@PathParam("id") long id, String person){
-        dto.PersonDTO pDTO = GSON.fromJson(person, dto.PersonDTO.class);
-        PersonDTO p = new PersonDTO(pDTO.getEmail(), pDTO.getFirstname(), pDTO.getLastname(), pDTO.getAddress(), pDTO.getZip(), pDTO.getHobbies(), pDTO.getPhone());
+        PersonDTO p = GSON.fromJson(person, PersonDTO.class);
         p.setId(id);
-        PersonDTO pNew = FACADE.editPerson(p);
-        return GSON.toJson(pNew);
+        Person pNew = FACADE.editPerson(p);
+        return GSON.toJson(new PersonDTO(pNew));
     }
-
-
  
 }
