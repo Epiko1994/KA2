@@ -55,6 +55,16 @@ public class PersonFacadeTest {
     @AfterAll
     public static void tearDownClass() {
 //        Clean up database after test is done or use a persistence unit with drop-and-create to start up clean on every test
+            EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.createNamedQuery("Person.deleteAllRows").executeUpdate();
+            em.createNamedQuery("Address.deleteAllRows").executeUpdate();
+            em.createNamedQuery("CityInfo.deleteAllRows").executeUpdate();
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
     }
 
     // Setup the DataBase in a known state BEFORE EACH TEST
@@ -80,18 +90,7 @@ public class PersonFacadeTest {
 
     @AfterEach
     public void tearDown() {
-//        Remove any data after each test was run
-            EntityManager em = emf.createEntityManager();
-        try {
-            em.getTransaction().begin();
-            em.createNamedQuery("Person.deleteAllRows").executeUpdate();
-            em.createNamedQuery("Address.deleteAllRows").executeUpdate();
-            em.createNamedQuery("CityInfo.deleteAllRows").executeUpdate();
-            em.getTransaction().commit();
-        } finally {
-            em.close();
-        }
-    }
+    } 
 
     // TODO: Delete or change this method 
     @Test
